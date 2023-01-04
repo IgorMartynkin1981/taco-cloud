@@ -10,18 +10,22 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
-@WebMvcTest(HomeController.class)
+@WebMvcTest   // <1>
 public class HomeControllerTest {
 
     @Autowired
-    private MockMvc mockMvc;
+    private MockMvc mockMvc;   // <2>
 
     @Test
-    public void homePageTest() throws Exception {
-        mockMvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("home"))
-                .andExpect(content().string(
-                        containsString("Welcome to my PET-project")));
+    public void testHomePage() throws Exception {
+        mockMvc.perform(get("/"))    // <3>
+
+                .andExpect(status().isOk())  // <4>
+
+                .andExpect(view().name("home"))  // <5>
+
+                .andExpect(content().string(           // <6>
+                        containsString("Welcome to...")));
     }
+
 }
